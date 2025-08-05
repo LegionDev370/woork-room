@@ -3,13 +3,13 @@
 			Created with Pixso.
 	</desc>
 	<defs/>
-	<rect id="Rectangle Copy" rx="12.000000" width="50.000000" height="50.000000" fill="#FFFFFF" fill-opacity="1.000000"/>
-	<rect id="Rectangle Copy" rx="12.000000" width="50.000000" height="50.000000" stroke="#979797" stroke-opacity="0" stroke-width="0.000000"/>
+	<rect id="Rectangle Copy" rx="12.000000" width="50.000000" height="50.000000" fill="#FFFFFF" fillOpacity="1.000000"/>
+	<rect id="Rectangle Copy" rx="12.000000" width="50.000000" height="50.000000" stroke="#979797" strokeOpacity="0" strokeWidth="0.000000"/>
 	<mask id="mask0_7170" mask-type="alpha" maskUnits="userSpaceOnUse" x="0.000000" y="0.000000" width="50.000000" height="50.000000">
-		<rect id="Rectangle Copy" rx="12.000000" width="50.000000" height="50.000000" fill="#FFFFFF" fill-opacity="1.000000"/>
-		<rect id="Rectangle Copy" rx="12.000000" width="50.000000" height="50.000000" stroke="#979797" stroke-opacity="0" stroke-width="0.000000"/>
+		<rect id="Rectangle Copy" rx="12.000000" width="50.000000" height="50.000000" fill="#FFFFFF" fillOpacity="1.000000"/>
+		<rect id="Rectangle Copy" rx="12.000000" width="50.000000" height="50.000000" stroke="#979797" strokeOpacity="0" strokeWidth="0.000000"/>
 	</mask>
-	<path id="Fill 2" d="M18 25C16.35 25 15 23.64 15 22C15 20.35 16.35 19 18 19C19.64 19 21 20.35 21 22C21 23.64 19.64 25 18 25Z" fill="#3F8CFF" fill-opacity="1.000000" fill-rule="evenodd"/>
-	<path id="Fill 3" d="M43 18.34C43 13.2 38.72 9 33.5 9L33.5 9C28.27 9 24 13.2 24 18.34L24 32C24 32 42.99 29.91 43 18.34C43 18.34 43 18.34 43 18.34Z" fill="#3F8CFF" fill-opacity="1.000000" fill-rule="evenodd"/>
-	<path id="Fill 4" d="M7 35.4995L7 35.498C7.00195 27.4473 21 26 21 26L21 35.4995C21 39.0747 17.8501 42 14 42C10.1499 42 7 39.0747 7 35.4995ZM12.1606 35.4995C12.1606 36.439 12.9883 37.2075 14 37.2075C15.0117 37.2075 15.8394 36.439 15.8394 35.4995C15.8394 34.5596 15.0117 33.791 14 33.791C12.9883 33.791 12.1606 34.5596 12.1606 35.4995Z" clip-rule="evenodd" fill="#3F8CFF" fill-opacity="1.000000" fill-rule="evenodd"/>
+	<path id="Fill 2" d="M18 25C16.35 25 15 23.64 15 22C15 20.35 16.35 19 18 19C19.64 19 21 20.35 21 22C21 23.64 19.64 25 18 25Z" fill="#3F8CFF" fillOpacity="1.000000" fillRule="evenodd"/>
+	<path id="Fill 3" d="M43 18.34C43 13.2 38.72 9 33.5 9L33.5 9C28.27 9 24 13.2 24 18.34L24 32C24 32 42.99 29.91 43 18.34C43 18.34 43 18.34 43 18.34Z" fill="#3F8CFF" fillOpacity="1.000000" fillRule="evenodd"/>
+	<path id="Fill 4" d="M7 35.4995L7 35.498C7.00195 27.4473 21 26 21 26L21 35.4995C21 39.0747 17.8501 42 14 42C10.1499 42 7 39.0747 7 35.4995ZM12.1606 35.4995C12.1606 36.439 12.9883 37.2075 14 37.2075C15.0117 37.2075 15.8394 36.439 15.8394 35.4995C15.8394 34.5596 15.0117 33.791 14 33.791C12.9883 33.791 12.1606 34.5596 12.1606 35.4995Z" clipRule="evenodd" fill="#3F8CFF" fillOpacity="1.000000" fillRule="evenodd"/>
 </svg>

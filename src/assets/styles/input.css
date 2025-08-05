@@ -10,6 +10,9 @@
 .input {
   border: 1px solid rgb(216, 224, 240);
   border-radius: 14px;
+  color: #7d8592;
+  font-weight: 400;
+  font-size: 14px;
   padding: 11px 0px 11px 18px;
 }
 

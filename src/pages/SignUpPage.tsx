@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
+import Step1 from "../components/steps/step-1";
 import Button from "../components/ui/Button";
 import Icon from "../components/ui/Icon";
-import Input from "../components/ui/Input";
 import ProgressStepAuth from "../components/ui/progress-step-auth";
 import useStepProgressAuth from "../hooks/useStepProgressAuth";
-
 const SignUpPage = () => {
   const [currentStep, setCurrentStep] = useState(1);
+  const totalStep = 4;
   const { progressData, setProgressData } = useStepProgressAuth();
   const handleSavePreviusStep = () => {
     const findStep = progressData.find((step) => step.step === currentStep - 1);
@@ -37,48 +37,27 @@ const SignUpPage = () => {
             <ProgressStepAuth steps={progressData} currentStep={currentStep} />
           </div>
         </div>
-        <div className="w-[100%] max-w-[70%] rounded-[24px]  bg-white shadow-[0px_6px_rgba(196_203_214_0.5)]">
-          <div className="flex flex-col max-w-[403px] mx-auto items-center pt-[115px]">
-            <h2 className="signin-title">Sign In to Woorkroom</h2>
-            <button onClick={() => incrementCurrentStep()}>add</button>
-            <form className="w-full flex flex-col gap-y-[31px] mt-[33px]">
-              <Input
-                inputClassName="w-full"
-                type="email"
-                label="Email Address"
-                placeholder="youremail@gmail.com"
-              />
-              <Input
-                inputClassName="w-full"
-                label="Password"
-                type={"password"}
-                placeholder="••••••••"
-                eyeIcon={true}
-              />
-              <div className="flex justify-between">
-                <div className="flex gap-x-2">
-                  <input id="save-me" type="checkbox" />
-                  <label
-                    htmlFor="save-me"
-                    className="font-medium text-[16px] text-[rgb(125_133_146)]"
-                  >
-                    Remember me
-                  </label>
-                </div>
-                <span className="font-medium text-[16px] text-[rgb(125_133_146)] cursor-pointer">
-                  Forgot Password?
-                </span>
-              </div>
-              <div className="flex flex-col items-center gap-y-[20px]">
-                <Button variant="medium" className="flex items-center gap-x-2">
-                  Sign In
-                  <Icon.rightArrowIcon />
-                </Button>
-                <span className="font-semibold text-[16px] text-[#3F8CFF]">
-                  Don’t have an account?
-                </span>
-              </div>
-            </form>
+        <div className="w-[100%] flex flex-col justify-between max-w-[70%] rounded-[24px]  bg-white shadow-[0px_6px_rgba(196_203_214_0.5)]">
+          <div className="flex flex-col max-w-[403px] w-full mx-auto items-center pt-[75px]">
+            <span className="font-bold text-[14px] text-[#3F8CFF]">
+              Step {currentStep}/{totalStep}
+            </span>
+            <h2 className="signin-title">
+              {progressData[currentStep - 1].title}
+            </h2>
+            <Step1 />
+          </div>
+          <div className="border-t-2 border-[#E4E6E8] pt-[18px] pb-[18px]">
+            <Button
+              disabled={true}
+              variant="small"
+              className={`flex ml-auto mr-10 items-center gap-x-3 ${
+                !true && "disabled"
+              }`}
+            >
+              Next Step
+              <Icon.rightArrowIcon />
+            </Button>
           </div>
         </div>
       </div>

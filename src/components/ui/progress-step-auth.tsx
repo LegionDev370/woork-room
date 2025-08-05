@@ -1,3 +1,4 @@
+import React from "react";
 import type { IDataProgress } from "../../hooks/useStepProgressAuth";
 import Icon from "./Icon";
 
@@ -12,7 +13,7 @@ const ProgressStep = ({ currentStep, steps }: ProgressProps) => {
       <div className="flex flex-col items-center justify-between gap-[6px]">
         {steps.map(({ isSuccess }, index) => {
           return (
-            <>
+            <React.Fragment key={index}>
               {isSuccess ? (
                 <>
                   <div
@@ -43,14 +44,14 @@ const ProgressStep = ({ currentStep, steps }: ProgressProps) => {
                   )}
                 </>
               )}
-            </>
+            </React.Fragment>
           );
         })}
       </div>
       <div className="flex flex-col justify-between text-white text-[18px] font-semibold">
         {steps.map(({ title, isSuccess }, index) => {
           return (
-            <>
+            <React.Fragment key={index}>
               {isSuccess ? (
                 <span className={`block`}>{title}</span>
               ) : (
@@ -62,7 +63,7 @@ const ProgressStep = ({ currentStep, steps }: ProgressProps) => {
                   {title}
                 </span>
               )}
-            </>
+            </React.Fragment>
           );
         })}
       </div>
