@@ -7,10 +7,17 @@ interface Props {
   label: string;
   inputRef: RefObject<HTMLInputElement>;
   handleClick: () => void;
+  sendOtpSuccess: boolean;
   isLoading?: boolean;
 }
 
-const InputMask = ({ label, inputRef, handleClick, isLoading }: Props) => {
+const InputMask = ({
+  label,
+  sendOtpSuccess,
+  inputRef,
+  handleClick,
+  isLoading,
+}: Props) => {
   return (
     <>
       <div className="flex flex-col gap-y-2">
@@ -28,8 +35,11 @@ const InputMask = ({ label, inputRef, handleClick, isLoading }: Props) => {
           <Button
             onClick={handleClick}
             itemType="button"
+            disabled={sendOtpSuccess}
             variant="small"
-            className="flex !py-[5px] items-center gap-x-3"
+            className={`flex !py-[5px] ${
+              sendOtpSuccess && `disabled`
+            } items-center gap-x-3`}
           >
             {isLoading ? <Loader /> : "Send"}
           </Button>

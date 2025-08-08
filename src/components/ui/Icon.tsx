@@ -4,6 +4,7 @@ interface IconProps {
   rightArrowIcon: () => JSX.Element;
   companyLogo: () => JSX.Element;
   correctIcon: () => JSX.Element;
+  infoTimerIcon: () => JSX.Element;
 }
 
 const Icon: IconProps = {
@@ -133,6 +134,60 @@ const Icon: IconProps = {
           strokeOpacity="0"
           strokeWidth="0.000000"
         />
+      </svg>
+    );
+  },
+  infoTimerIcon: () => {
+    return (
+      <svg
+        viewBox="0 0 24 24"
+        xmlns="http://www.w3.org/2000/svg"
+        width="24.000000"
+        height="24.000000"
+        fill="none"
+      >
+        <rect
+          id="icn/general/hint"
+          width="24.000000"
+          height="24.000000"
+          x="0.000000"
+          y="0.000000"
+        />
+        <g id="icn/general/hint">
+          <rect
+            id="container"
+            width="24.000000"
+            height="24.000000"
+            x="0.000000"
+            y="0.000000"
+            fill="rgb(215.985,215.985,215.985)"
+            fill-opacity="0"
+          />
+          <rect
+            id="container"
+            width="24.000000"
+            height="24.000000"
+            x="0.000000"
+            y="0.000000"
+            stroke="rgb(150.96,150.96,150.96)"
+            stroke-opacity="0"
+            stroke-width="0"
+          />
+          <path
+            id="info"
+            d="M12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2ZM13.01 8C13.01 7.44772 12.5623 7 12.01 7L11.8834 7.00673C11.386 7.06449 11 7.48716 11 8C11 8.55228 11.4477 9 12 9L12.1266 8.99327C12.624 8.93551 13.01 8.51284 13.01 8ZM12 11C12.5128 11 12.9355 11.386 12.9933 11.8834L13 12L13 16C13 16.5523 12.5523 17 12 17C11.4872 17 11.0645 16.614 11.0067 16.1166L11 16L11 12C11 11.4477 11.4477 11 12 11Z"
+            fill="rgb(63,140,255)"
+            fill-rule="evenodd"
+          />
+          <path
+            id="info"
+            d="M12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2ZM13.01 8C13.01 7.44772 12.5623 7 12.01 7L11.8834 7.00673C11.386 7.06449 11 7.48716 11 8C11 8.55228 11.4477 9 12 9L12.1266 8.99327C12.624 8.93551 13.01 8.51284 13.01 8ZM12 11C12.5128 11 12.9355 11.386 12.9933 11.8834L13 12L13 16C13 16.5523 12.5523 17 12 17C11.4872 17 11.0645 16.614 11.0067 16.1166L11 16L11 12C11 11.4477 11.4477 11 12 11Z"
+            fill-rule="evenodd"
+            stroke="rgb(150.96,150.96,150.96)"
+            stroke-opacity="0"
+            stroke-width="0"
+          />
+        </g>
       </svg>
     );
   },

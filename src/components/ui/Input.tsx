@@ -9,6 +9,7 @@ interface InputProps extends HTMLAttributes<HTMLInputElement> {
   label: string;
   eyeIcon?: boolean;
   inputClassName: string;
+  required?: boolean;
   placeholder: string;
   type: HTMLInputTypeAttribute;
 }
@@ -16,6 +17,7 @@ interface InputProps extends HTMLAttributes<HTMLInputElement> {
 const Input = ({
   label,
   eyeIcon,
+  required,
   inputClassName,
   type,
   ...props
@@ -35,6 +37,7 @@ const Input = ({
           <input
             type={visible}
             className={`input ${inputClassName}`}
+            required={required}
             {...props}
           />
           {eyeIcon && (
