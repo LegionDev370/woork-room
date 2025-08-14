@@ -4,6 +4,7 @@ import RootLayout from "../layouts/RootLayout";
 import DashboardPage from "../pages/DashboardPage";
 import SignInPage from "../pages/SignInPage";
 import SignUpPage from "../pages/SignUpPage";
+import ProtectedRouteComponent from "../components/protected.route";
 
 export const routes = createBrowserRouter([
   {
@@ -11,7 +12,11 @@ export const routes = createBrowserRouter([
     element: <AppWrapperLayout />,
     children: [
       {
-        element: <RootLayout />,
+        element: (
+          <ProtectedRouteComponent>
+            <RootLayout />
+          </ProtectedRouteComponent>
+        ),
         children: [
           {
             index: true,

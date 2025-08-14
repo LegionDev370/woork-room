@@ -1,9 +1,47 @@
+import { useForm, type SubmitHandler } from "react-hook-form";
 import Illustration from "../assets/icons/Illustration.svg";
 import "../assets/styles/sign-up.css";
 import Button from "../components/ui/Button";
 import Icon from "../components/ui/Icon";
 import Input from "../components/ui/Input";
+import { useLogin } from "../hooks/requests/useLogin";
+import { useEffect } from "react";
+import Loader from "../components/ui/Loader";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
+
+interface ILoginForm {
+  email: string;
+  password: string;
+}
+
 const SignInPage = () => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    setValue,
+  } = useForm<ILoginForm>();
+  const { mutateAsync, isPending, isSuccess, isError, error } = useLogin();
+  const navigate = useNavigate();
+  const onLogin: SubmitHandler<ILoginForm> = ({ email, password }) => {
+    mutateAsync({ email, password });
+  };
+
+  useEffect(() => {
+    if (isSuccess) {
+      toast.success("success");
+      setTimeout(() => {
+        navigate("/");
+      }, 2000);
+    }
+  }, [isSuccess]);
+
+  useEffect(() => {
+    if (isError) {
+      toast.error(error["response"].data.message);
+    }
+  }, [isError]);
   return (
     <section className="h-screen p-[20px_35px_30px_35px] bg-[#F4F9FD]">
       <div className="flex rounded-[24px] overflow-hidden h-full">
@@ -27,18 +65,23 @@ const SignInPage = () => {
         <div className="w-[100%] max-w-[50%] bg-white shadow-[0px_6px_rgba(196_203_214_0.5)]">
           <div className="flex flex-col max-w-[403px] mx-auto items-center pt-[115px]">
             <h2 className="signin-title">Sign In to Woorkroom</h2>
-            <form className="w-full flex flex-col gap-y-[31px] mt-[33px]">
+            <form
+              onSubmit={handleSubmit(onLogin)}
+              className="w-full flex flex-col gap-y-[31px] mt-[33px]"
+            >
               <Input
                 inputClassName="w-full"
                 type="email"
                 label="Email Address"
                 placeholder="youremail@gmail.com"
+                {...register("email")}
               />
               <Input
                 inputClassName="w-full"
                 label="Password"
                 type={"password"}
                 placeholder="••••••••"
+                {...register("password")}
                 eyeIcon={true}
               />
               <div className="flex justify-between">
@@ -56,9 +99,19 @@ const SignInPage = () => {
                 </span>
               </div>
               <div className="flex flex-col items-center gap-y-[20px]">
-                <Button variant="medium" className="flex items-center gap-x-2">
-                  Sign In
-                  <Icon.rightArrowIcon />
+                <Button
+                  itemType="submit"
+                  variant="medium"
+                  className="flex items-center gap-x-2"
+                >
+                  {isPending ? (
+                    <Loader />
+                  ) : (
+                    <>
+                      {"Sign In"}
+                      <Icon.rightArrowIcon />
+                    </>
+                  )}
                 </Button>
                 <span className="font-semibold text-[16px] text-[#3F8CFF]">
                   Don’t have an account?

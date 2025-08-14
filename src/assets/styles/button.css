@@ -1,3 +1,5 @@
+@reference '../../index.css';
+
 .btn {
   background-color: #3f8cff;
   color: white;
@@ -17,5 +19,16 @@
 }
 
 .btn.disabled {
-  @apply text-white bg-blue-400 dark:bg-blue-500 cursor-not-allowed font-medium rounded-lg text-sm px-5 py-2.5 text-center;
+  color: #fff; /* text-white */
+  background-color: oklch(0.69 0.15 243.16); /* bg-blue-400 */
+  cursor: not-allowed; /* cursor-not-allowed */
+  font-weight: 500; /* font-medium */
+  border-radius: 0.5rem; /* rounded-lg */
+  font-size: 0.875rem; /* text-sm */
+  line-height: 1.25rem; /* text-sm (line height in v4) */
+  padding-left: 1.25rem; /* px-5 */
+  padding-right: 1.25rem; /* px-5 */
+  padding-top: 0.625rem; /* py-2.5 */
+  padding-bottom: 0.625rem; /* py-2.5 */
+  text-align: center; /* text-center */
 }

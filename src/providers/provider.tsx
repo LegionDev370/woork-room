@@ -1,4 +1,5 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import CookieProvider from "./cookie-provider";
 
 const queryClient = new QueryClient();
 
@@ -8,7 +9,9 @@ interface Props {
 
 const Providers = ({ children }: Props) => {
   return (
-    <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
+    <QueryClientProvider client={queryClient}>
+      <CookieProvider>{children}</CookieProvider>
+    </QueryClientProvider>
   );
 };
 
