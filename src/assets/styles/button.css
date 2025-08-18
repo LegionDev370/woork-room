@@ -7,6 +7,15 @@
   box-shadow: 0px 6px 12px 0px rgba(63, 140, 255, 0.26);
 }
 
+.btn.previus {
+  background: none;
+  box-shadow: none;
+  font-size: 16px;
+  font-weight: 400;
+  font-family: Nunito Sans;
+  color: #3f8cff;
+}
+
 .btn.medium {
   padding: 13px 45px;
 }

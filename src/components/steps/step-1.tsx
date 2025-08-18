@@ -1,4 +1,10 @@
-import { useEffect, useRef, useState } from "react";
+import {
+  useEffect,
+  useRef,
+  useState,
+  type Dispatch,
+  type SetStateAction,
+} from "react";
 import "../../assets/styles/input.css";
 import useSendOtp from "../../hooks/requests/useSendOtp";
 import Input from "../ui/Input";
@@ -6,7 +12,15 @@ import InputMask from "../ui/input-mask";
 import OtpInput from "../ui/otp-input";
 import { toast } from "react-toastify";
 import CodeTimer from "../code-timer";
-const Step1 = () => {
+import type { UseFormRegister, UseFormWatch } from "react-hook-form";
+
+interface Props {
+  register: UseFormRegister<any>;
+  watch: UseFormWatch<any>;
+  setNextStep: Dispatch<SetStateAction<boolean>>;
+}
+
+const Step1 = ({ register, watch, setNextStep }: Props) => {
   const [canSendOtp, setCanSendOtp] = useState<boolean>(true);
   const {
     mutateAsync,
@@ -25,6 +39,7 @@ const Step1 = () => {
   useEffect(() => {
     if (sendOtpSuccess) {
       toast.success(`Sms code sended`);
+      setNextStep(true);
       setCanSendOtp(false);
     }
   }, [sendOtpSuccess]);
@@ -62,6 +77,7 @@ const Step1 = () => {
         required={true}
         label="Email Address"
         placeholder="youremail@gmail.com"
+        {...register("email")}
       />
       <Input
         required={true}
@@ -70,6 +86,7 @@ const Step1 = () => {
         type={"password"}
         placeholder="••••••••"
         eyeIcon={true}
+        {...register("password")}
       />
     </>
   );
