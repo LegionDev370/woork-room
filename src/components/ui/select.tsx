@@ -1,11 +1,6 @@
 import ReactSelect from "react-select";
 import type { IOptions } from "../steps/step-2";
-import {
-  Controller,
-  type UseControllerReturn,
-  type UseFormRegister,
-  type UseFormReturn,
-} from "react-hook-form";
+import { Controller, type UseFormReturn } from "react-hook-form";
 
 interface Props {
   question_text: string;
