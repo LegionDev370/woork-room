@@ -1,7 +1,15 @@
+import { useEffect, type Dispatch, type SetStateAction } from "react";
 import { useGetProfileQuestions } from "../../hooks/requests/useGetProfileQuestions";
+import AttributeLayout from "../attribute-layout";
 import Select from "../ui/select";
+import type {
+  UseControllerReturn,
+  UseFormRegister,
+  UseFormReturn,
+} from "react-hook-form";
 
 export interface IOptions {
+  id: string;
   option_text: string;
   option_value: string;
 }
@@ -14,24 +22,32 @@ export interface IQuestions {
   options?: IOptions[];
 }
 
-const Step2 = () => {
+interface Props {
+  setNextStep: Dispatch<SetStateAction<boolean>>;
+  form: UseFormReturn<any>;
+}
+
+const Step2 = ({ setNextStep, form }: Props) => {
   const { data, isError, isSuccess } = useGetProfileQuestions(2);
   const questions: IQuestions[] = data?.data;
+  useEffect(() => {
+    setNextStep(true);
+  }, []);
   return (
     <div className="flex flex-col gap-y-6">
       {questions &&
         questions.length >= 1 &&
-        questions.map((question) => {
-          if (question.question_type === "select") {
-            return (
-              <Select
-                key={question.id}
-                question_text={question.question_text}
-                options={question.options}
-              />
-            );
-          }
-        })}
+        questions.map((question) => (
+          <AttributeLayout
+            form={form}
+            key={question.id}
+            is_required={question.is_required}
+            question_id={question.id}
+            question_text={question.question_text}
+            type={question.question_type}
+            options={question.options}
+          />
+        ))}
     </div>
   );
 };

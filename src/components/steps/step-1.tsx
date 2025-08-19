@@ -12,15 +12,18 @@ import InputMask from "../ui/input-mask";
 import OtpInput from "../ui/otp-input";
 import { toast } from "react-toastify";
 import CodeTimer from "../code-timer";
-import type { UseFormRegister, UseFormWatch } from "react-hook-form";
+import type {
+  UseFormRegister,
+  UseFormReturn,
+  UseFormWatch,
+} from "react-hook-form";
 
 interface Props {
-  register: UseFormRegister<any>;
-  watch: UseFormWatch<any>;
+  form: UseFormReturn<any>;
   setNextStep: Dispatch<SetStateAction<boolean>>;
 }
 
-const Step1 = ({ register, watch, setNextStep }: Props) => {
+const Step1 = ({ form, setNextStep }: Props) => {
   const [canSendOtp, setCanSendOtp] = useState<boolean>(true);
   const {
     mutateAsync,
@@ -39,7 +42,6 @@ const Step1 = ({ register, watch, setNextStep }: Props) => {
   useEffect(() => {
     if (sendOtpSuccess) {
       toast.success(`Sms code sended`);
-      setNextStep(true);
       setCanSendOtp(false);
     }
   }, [sendOtpSuccess]);
@@ -59,6 +61,7 @@ const Step1 = ({ register, watch, setNextStep }: Props) => {
       />
       {!canSendOtp && (
         <OtpInput
+          setNextStep={setNextStep}
           setCanSendOtp={setCanSendOtp}
           phone_number={phoneNumber}
           label="Code from SMS"
@@ -77,7 +80,7 @@ const Step1 = ({ register, watch, setNextStep }: Props) => {
         required={true}
         label="Email Address"
         placeholder="youremail@gmail.com"
-        {...register("email")}
+        {...form.register("email")}
       />
       <Input
         required={true}
@@ -86,7 +89,7 @@ const Step1 = ({ register, watch, setNextStep }: Props) => {
         type={"password"}
         placeholder="••••••••"
         eyeIcon={true}
-        {...register("password")}
+        {...form.register("password")}
       />
     </>
   );

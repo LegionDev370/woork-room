@@ -7,9 +7,15 @@ interface Props {
   label: string;
   phone_number: string;
   setCanSendOtp: Dispatch<SetStateAction<boolean>>;
+  setNextStep: Dispatch<SetStateAction<boolean>>;
 }
 
-const OtpInput = ({ label, phone_number, setCanSendOtp }: Props) => {
+const OtpInput = ({
+  label,
+  phone_number,
+  setCanSendOtp,
+  setNextStep,
+}: Props) => {
   const [otp, setOtp] = useState("");
   const { mutateAsync, isError, isPending, error, isSuccess } = useVerifyOtp();
   useEffect(() => {
@@ -22,6 +28,7 @@ const OtpInput = ({ label, phone_number, setCanSendOtp }: Props) => {
       toast.success("otp verified");
       setTimeout(() => {
         setCanSendOtp(true);
+        setNextStep(true);
       }, 2000);
     }
   }, [isSuccess]);

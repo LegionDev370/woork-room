@@ -13,7 +13,7 @@ import { toast } from "react-toastify";
 const SignUpPage = () => {
   const [currentStep, setCurrentStep] = useState(2);
   const [nextStep, setNextStep] = useState<boolean>(false);
-  const { register, watch, handleSubmit } = useForm();
+  const form = useForm();
   const totalStep = 4;
   const { progressData, setProgressData } = useStepProgressAuth();
   const handleSavePreviusStep = () => {
@@ -39,12 +39,10 @@ const SignUpPage = () => {
   const getCurrentStep = () => {
     switch (currentStep) {
       case 1: {
-        return (
-          <Step1 setNextStep={setNextStep} watch={watch} register={register} />
-        );
+        return <Step1 form={form} setNextStep={setNextStep} />;
       }
       case 2: {
-        return <Step2 />;
+        return <Step2 form={form} setNextStep={setNextStep} />;
       }
       case 3: {
         return <Step3 />;
@@ -58,8 +56,11 @@ const SignUpPage = () => {
   const { mutateAsync, data, isSuccess } = useCheckEmail();
 
   const onSubmit: SubmitHandler<any> = (data: any) => {
-    const email = data.email;
-    mutateAsync(email);
+    if (currentStep <= 1) {
+      const email = data.email;
+      mutateAsync(email);
+    }
+    console.log(data);
   };
 
   useEffect(() => {
@@ -96,7 +97,7 @@ const SignUpPage = () => {
             </h2>
             <form
               className="w-full h-full flex flex-col justify-between"
-              onSubmit={handleSubmit(onSubmit)}
+              onSubmit={form.handleSubmit(onSubmit)}
             >
               <div className="flex w-full max-w-[403px] mx-auto flex-col gap-y-[15px] mt-[33px]">
                 {getCurrentStep()}
