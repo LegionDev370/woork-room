@@ -5,18 +5,14 @@ import {
   type Dispatch,
   type SetStateAction,
 } from "react";
+import type { UseFormReturn } from "react-hook-form";
+import { toast } from "react-toastify";
 import "../../assets/styles/input.css";
 import useSendOtp from "../../hooks/requests/useSendOtp";
+import CodeTimer from "../code-timer";
 import Input from "../ui/Input";
 import InputMask from "../ui/input-mask";
 import OtpInput from "../ui/otp-input";
-import { toast } from "react-toastify";
-import CodeTimer from "../code-timer";
-import type {
-  UseFormRegister,
-  UseFormReturn,
-  UseFormWatch,
-} from "react-hook-form";
 
 interface Props {
   form: UseFormReturn<any>;

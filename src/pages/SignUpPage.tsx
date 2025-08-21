@@ -11,7 +11,7 @@ import { useForm, type SubmitHandler } from "react-hook-form";
 import { useCheckEmail } from "../hooks/requests/useCheckEmail";
 import { toast } from "react-toastify";
 const SignUpPage = () => {
-  const [currentStep, setCurrentStep] = useState(2);
+  const [currentStep, setCurrentStep] = useState(1);
   const [nextStep, setNextStep] = useState<boolean>(false);
   const form = useForm();
   const totalStep = 4;
@@ -45,7 +45,7 @@ const SignUpPage = () => {
         return <Step2 form={form} setNextStep={setNextStep} />;
       }
       case 3: {
-        return <Step3 />;
+        return <Step3 form={form} setNextStep={setNextStep} />;
       }
       case 4: {
         return <Step4 />;
@@ -56,9 +56,8 @@ const SignUpPage = () => {
   const { mutateAsync, data, isSuccess } = useCheckEmail();
 
   const onSubmit: SubmitHandler<any> = (data: any) => {
-    if (currentStep <= 1) {
-      const email = data.email;
-      mutateAsync(email);
+    if (currentStep < 4) {
+      return incrementCurrentStep();
     }
     console.log(data);
   };
@@ -72,6 +71,13 @@ const SignUpPage = () => {
       toast.error("email already exists");
     }
   }, [isSuccess]);
+
+  const onCheckEmail = () => {
+    if (currentStep <= 1) {
+      const email = form.getValues("email");
+      mutateAsync(email);
+    }
+  };
 
   return (
     <section className="h-screen p-[20px_35px_30px_35px] bg-[#F4F9FD]">
@@ -110,7 +116,7 @@ const SignUpPage = () => {
                 {currentStep !== 1 && (
                   <Button
                     variant="small"
-                    type="submit"
+                    type="button"
                     onClick={() => decrementCurrentStep()}
                     className={`flex ml-[50px] previus items-center gap-x-3`}
                   >
@@ -120,8 +126,9 @@ const SignUpPage = () => {
                 )}
                 <Button
                   variant="small"
-                  type="submit"
+                  type={currentStep <= 1 ? "button" : "submit"}
                   disabled={!nextStep}
+                  onClick={onCheckEmail}
                   className={`flex ml-auto mr-10 items-center gap-x-3 ${
                     !nextStep ? "disabled" : ""
                   }`}

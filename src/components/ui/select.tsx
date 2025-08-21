@@ -23,10 +23,6 @@ const Select = ({ question_text, options, is_required, form, name }: Props) => {
       <Controller
         name={name}
         control={form.control}
-        defaultValue={{
-          value: options[0].option_value,
-          label: options[0].option_text,
-        }}
         render={(props) => {
           return (
             <ReactSelect

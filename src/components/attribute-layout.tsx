@@ -7,6 +7,8 @@ import type {
   UseFormRegister,
   UseFormReturn,
 } from "react-hook-form";
+import Input from "./ui/Input";
+import AttributeButton from "./ui/attribute-button";
 
 interface Props {
   type: string;
@@ -42,6 +44,23 @@ const AttributeLayout = ({
           name={question_text}
           options={options}
           question_text={question_text}
+        />
+      )}
+      {type === "text" && (
+        <Input
+          label={question_text}
+          inputClassName="w-full"
+          required={is_required}
+          type="text"
+          {...form.register(question_text)}
+        />
+      )}
+      {type === "button" && (
+        <AttributeButton
+          form={form}
+          name={question_text}
+          options={options}
+          label={question_text}
         />
       )}
     </>
