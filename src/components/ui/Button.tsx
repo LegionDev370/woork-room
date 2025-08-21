@@ -11,16 +11,16 @@ const Button = ({
   variant,
   children,
   className,
-  type,
+  type = "button",
   disabled = false,
   ...props
 }: ButtonProps) => {
   return (
     <button
+      {...props}
       disabled={disabled}
       type={type}
       className={`btn cursor-pointer ${variant} ${className}`}
-      {...props}
     >
       {children}
     </button>

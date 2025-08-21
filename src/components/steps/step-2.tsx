@@ -1,12 +1,7 @@
 import { useEffect, type Dispatch, type SetStateAction } from "react";
+import type { UseFormReturn } from "react-hook-form";
 import { useGetProfileQuestions } from "../../hooks/requests/useGetProfileQuestions";
 import AttributeLayout from "../attribute-layout";
-import Select from "../ui/select";
-import type {
-  UseControllerReturn,
-  UseFormRegister,
-  UseFormReturn,
-} from "react-hook-form";
 
 export interface IOptions {
   id: string;

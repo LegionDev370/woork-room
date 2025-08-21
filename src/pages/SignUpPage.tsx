@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState, type FormEvent } from "react";
 import Step1 from "../components/steps/step-1";
 import Button from "../components/ui/Button";
 import Icon from "../components/ui/Icon";
@@ -14,6 +14,7 @@ const SignUpPage = () => {
   const [currentStep, setCurrentStep] = useState(1);
   const [nextStep, setNextStep] = useState<boolean>(false);
   const form = useForm();
+  const formRef = useRef<HTMLFormElement>(null);
   const totalStep = 4;
   const { progressData, setProgressData } = useStepProgressAuth();
   const handleSavePreviusStep = () => {
@@ -48,7 +49,7 @@ const SignUpPage = () => {
         return <Step3 form={form} setNextStep={setNextStep} />;
       }
       case 4: {
-        return <Step4 />;
+        return <Step4 form={form} />;
       }
     }
   };
@@ -56,9 +57,6 @@ const SignUpPage = () => {
   const { mutateAsync, data, isSuccess } = useCheckEmail();
 
   const onSubmit: SubmitHandler<any> = (data: any) => {
-    if (currentStep < 4) {
-      return incrementCurrentStep();
-    }
     console.log(data);
   };
 
@@ -72,11 +70,16 @@ const SignUpPage = () => {
     }
   }, [isSuccess]);
 
-  const onCheckEmail = () => {
+  const onNextStep = () => {
+    const isValid = formRef.current.checkValidity();
+    if (!isValid) {
+      return formRef.current.reportValidity();
+    }
     if (currentStep <= 1) {
       const email = form.getValues("email");
-      mutateAsync(email);
+      return mutateAsync(email);
     }
+    incrementCurrentStep();
   };
 
   return (
@@ -102,8 +105,8 @@ const SignUpPage = () => {
               {progressData[currentStep - 1].title}
             </h2>
             <form
+              ref={formRef}
               className="w-full h-full flex flex-col justify-between"
-              onSubmit={form.handleSubmit(onSubmit)}
             >
               <div className="flex w-full max-w-[403px] mx-auto flex-col gap-y-[15px] mt-[33px]">
                 {getCurrentStep()}
@@ -124,18 +127,30 @@ const SignUpPage = () => {
                     Previous
                   </Button>
                 )}
-                <Button
-                  variant="small"
-                  type={currentStep <= 1 ? "button" : "submit"}
-                  disabled={!nextStep}
-                  onClick={onCheckEmail}
-                  className={`flex ml-auto mr-10 items-center gap-x-3 ${
-                    !nextStep ? "disabled" : ""
-                  }`}
-                >
-                  Next Step
-                  <Icon.rightArrowIcon />
-                </Button>
+                {currentStep < 4 ? (
+                  <Button
+                    variant="small"
+                    type={"button"}
+                    disabled={!nextStep}
+                    onClick={onNextStep}
+                    className={`flex ml-auto mr-10 items-center gap-x-3 ${
+                      !nextStep ? "disabled" : ""
+                    }`}
+                  >
+                    Next Step
+                    <Icon.rightArrowIcon />
+                  </Button>
+                ) : (
+                  <Button
+                    variant="small"
+                    type={"button"}
+                    onClick={form.handleSubmit(onSubmit)}
+                    className={`flex ml-auto mr-10 items-center gap-x-3`}
+                  >
+                    Submit
+                    <Icon.rightArrowIcon />
+                  </Button>
+                )}
               </div>
             </form>
           </div>

@@ -1,14 +1,9 @@
-import React from "react";
+import type { UseFormReturn } from "react-hook-form";
 import type { IOptions } from "./steps/step-2";
-import Select from "./ui/select";
-import AttributeRadio from "./ui/attribute-radio";
-import type {
-  UseControllerReturn,
-  UseFormRegister,
-  UseFormReturn,
-} from "react-hook-form";
 import Input from "./ui/Input";
 import AttributeButton from "./ui/attribute-button";
+import AttributeRadio from "./ui/attribute-radio";
+import Select from "./ui/select";
 
 interface Props {
   type: string;
