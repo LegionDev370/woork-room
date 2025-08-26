@@ -8,9 +8,17 @@ interface Props {
   is_required: boolean;
   name: string;
   form: UseFormReturn<any>;
+  question_id: string;
 }
 
-const Select = ({ question_text, options, is_required, form, name }: Props) => {
+const Select = ({
+  question_text,
+  options,
+  is_required,
+  form,
+  name,
+  question_id,
+}: Props) => {
   const optionsData = options?.map((option) => {
     return {
       value: option.id,
@@ -21,13 +29,13 @@ const Select = ({ question_text, options, is_required, form, name }: Props) => {
     <div className="flex flex-col gap-y-2">
       <label className="font-semibold text-[#7D8592]">{question_text}</label>
       <Controller
-        name={name}
+        name={question_id}
         control={form.control}
         render={(props) => {
           return (
             <ReactSelect
               options={optionsData}
-              onChange={props.field.onChange}
+              onChange={({ value }) => props.field.onChange(value)}
               value={props.field.value}
               required={is_required}
               styles={{

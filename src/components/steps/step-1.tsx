@@ -31,7 +31,7 @@ const Step1 = ({ form, setNextStep }: Props) => {
   const ref = useRef<HTMLInputElement>(null);
   const [phoneNumber, setPhoneNumber] = useState<string>("+998950086735");
   const handleClick = () => {
-    const phoneNumber = ref.current?.value;
+    const phoneNumber = form.getValues("phone_number");
     setPhoneNumber(phoneNumber);
     mutateAsync(phoneNumber);
   };
@@ -46,13 +46,14 @@ const Step1 = ({ form, setNextStep }: Props) => {
       toast.error(error["response"].data.message);
     }
   }, [isError]);
+
   return (
     <>
       <InputMask
+        form={form}
         handleClick={handleClick}
         isLoading={isPending}
         sendOtpSuccess={!canSendOtp}
-        inputRef={ref}
         label="Mobile Number"
       />
       {!canSendOtp && (

@@ -7,9 +7,16 @@ interface Props {
   form: UseFormReturn<any>;
   options: IOptions[];
   name: string;
+  question_id: string;
 }
 
-const AttributeButton = ({ label, options, name, form }: Props) => {
+const AttributeButton = ({
+  label,
+  options,
+  name,
+  form,
+  question_id,
+}: Props) => {
   const [selectedValue, setSelectedValue] = useState("");
   return (
     <div className="flex flex-col gap-y-2">
@@ -29,10 +36,10 @@ const AttributeButton = ({ label, options, name, form }: Props) => {
               {option.option_text}
               <input
                 type="radio"
-                value={option.option_value}
+                value={option.id}
                 className="hidden"
                 id={option.id}
-                {...form.register(name)}
+                {...form.register(question_id)}
               />
             </label>
           );

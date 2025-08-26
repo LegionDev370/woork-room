@@ -27,6 +27,7 @@ const AttributeLayout = ({
       {type === "select" && (
         <Select
           form={form}
+          question_id={question_id}
           name={question_text}
           is_required={is_required}
           options={options}
@@ -35,6 +36,7 @@ const AttributeLayout = ({
       )}
       {type === "radio" && (
         <AttributeRadio
+          question_id={question_id}
           form={form}
           name={question_text}
           options={options}
@@ -52,6 +54,7 @@ const AttributeLayout = ({
       )}
       {type === "button" && (
         <AttributeButton
+          question_id={question_id}
           form={form}
           name={question_text}
           options={options}

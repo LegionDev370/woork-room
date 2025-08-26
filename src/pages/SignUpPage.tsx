@@ -1,15 +1,17 @@
-import { useEffect, useRef, useState, type FormEvent } from "react";
+import { useEffect, useRef, useState } from "react";
+import { useForm, type SubmitHandler } from "react-hook-form";
+import { toast } from "react-toastify";
 import Step1 from "../components/steps/step-1";
-import Button from "../components/ui/Button";
-import Icon from "../components/ui/Icon";
-import ProgressStepAuth from "../components/ui/progress-step-auth";
-import useStepProgressAuth from "../hooks/useStepProgressAuth";
 import Step2 from "../components/steps/step-2";
 import Step3 from "../components/steps/step-3";
 import Step4 from "../components/steps/step-4";
-import { useForm, type SubmitHandler } from "react-hook-form";
+import Button from "../components/ui/Button";
+import Icon from "../components/ui/Icon";
+import ProgressStepAuth from "../components/ui/progress-step-auth";
 import { useCheckEmail } from "../hooks/requests/useCheckEmail";
-import { toast } from "react-toastify";
+import { useRegister, type IRegister } from "../hooks/requests/useRegister";
+import useStepProgressAuth from "../hooks/useStepProgressAuth";
+import { useNavigate } from "react-router-dom";
 const SignUpPage = () => {
   const [currentStep, setCurrentStep] = useState(1);
   const [nextStep, setNextStep] = useState<boolean>(false);
@@ -17,6 +19,8 @@ const SignUpPage = () => {
   const formRef = useRef<HTMLFormElement>(null);
   const totalStep = 4;
   const { progressData, setProgressData } = useStepProgressAuth();
+  const { mutateAsync: mutateRegisterAsync, isSuccess: registerSuccess } =
+    useRegister();
   const handleSavePreviusStep = () => {
     const findStep = progressData.find((step) => step.step === currentStep - 1);
     findStep.isSuccess = true;
@@ -27,6 +31,8 @@ const SignUpPage = () => {
       setCurrentStep((prevState) => prevState + 1);
     }
   };
+
+  const navigate = useNavigate();
 
   const decrementCurrentStep = () => {
     setCurrentStep((prevState) => prevState - 1);
@@ -63,7 +69,36 @@ const SignUpPage = () => {
         members.push(data[i]);
       }
     }
+
+    let sendData: IRegister = {
+      email: data.email,
+      password: data.password,
+      phone_number: data.phone_number,
+      answers: getAnswers(data),
+      members,
+    };
+
+    mutateRegisterAsync(sendData);
   };
+
+  function getAnswers(data: any) {
+    const arr = Object.entries(data);
+    const result = [];
+    for (let [key, value] of arr) {
+      if (
+        !key.includes("email") &&
+        !key.includes("phone_number") &&
+        !key.includes("password") &&
+        !key.startsWith("members-")
+      ) {
+        result.push({
+          question_id: key,
+          value,
+        });
+      }
+    }
+    return result;
+  }
 
   useEffect(() => {
     if (isSuccess) {
@@ -74,6 +109,10 @@ const SignUpPage = () => {
       toast.error("email already exists");
     }
   }, [isSuccess]);
+
+  useEffect(() => {
+    if (registerSuccess) navigate("/");
+  }, [registerSuccess]);
 
   const onNextStep = () => {
     const isValid = formRef.current.checkValidity();

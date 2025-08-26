@@ -25,6 +25,7 @@ interface Props {
 const Step2 = ({ setNextStep, form }: Props) => {
   const { data, isError, isSuccess } = useGetProfileQuestions(2);
   const questions: IQuestions[] = data?.data;
+  
   useEffect(() => {
     setNextStep(true);
   }, []);
