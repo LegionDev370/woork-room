@@ -13,7 +13,7 @@ interface Props {
 const Select = ({ question_text, options, is_required, form, name }: Props) => {
   const optionsData = options?.map((option) => {
     return {
-      value: option.option_value,
+      value: option.id,
       label: option.option_text,
     };
   });

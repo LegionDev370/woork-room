@@ -49,7 +49,7 @@ const SignUpPage = () => {
         return <Step3 form={form} setNextStep={setNextStep} />;
       }
       case 4: {
-        return <Step4 form={form} />;
+        return <Step4 form={form} formRef={formRef} />;
       }
     }
   };
@@ -57,13 +57,18 @@ const SignUpPage = () => {
   const { mutateAsync, data, isSuccess } = useCheckEmail();
 
   const onSubmit: SubmitHandler<any> = (data: any) => {
-    console.log(data);
+    let members = [];
+    for (let i in data) {
+      if (i.split("-")[0] == "members") {
+        members.push(data[i]);
+      }
+    }
   };
 
   useEffect(() => {
     if (isSuccess) {
       const status = data.data;
-      if (!status) {
+      if (status) {
         return incrementCurrentStep();
       }
       toast.error("email already exists");
@@ -148,7 +153,6 @@ const SignUpPage = () => {
                     className={`flex ml-auto mr-10 items-center gap-x-3`}
                   >
                     Submit
-                    <Icon.rightArrowIcon />
                   </Button>
                 )}
               </div>
