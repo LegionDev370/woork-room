@@ -12,6 +12,7 @@ import { useCheckEmail } from "../hooks/requests/useCheckEmail";
 import { useRegister, type IRegister } from "../hooks/requests/useRegister";
 import useStepProgressAuth from "../hooks/useStepProgressAuth";
 import { useNavigate } from "react-router-dom";
+import Loader from "../components/ui/Loader";
 const SignUpPage = () => {
   const [currentStep, setCurrentStep] = useState(1);
   const [nextStep, setNextStep] = useState<boolean>(false);
@@ -19,8 +20,13 @@ const SignUpPage = () => {
   const formRef = useRef<HTMLFormElement>(null);
   const totalStep = 4;
   const { progressData, setProgressData } = useStepProgressAuth();
-  const { mutateAsync: mutateRegisterAsync, isSuccess: registerSuccess } =
-    useRegister();
+
+  const {
+    mutateAsync: mutateRegisterAsync,
+    isSuccess: registerSuccess,
+    isPending: registerPending,
+  } = useRegister();
+
   const handleSavePreviusStep = () => {
     const findStep = progressData.find((step) => step.step === currentStep - 1);
     findStep.isSuccess = true;
@@ -191,7 +197,7 @@ const SignUpPage = () => {
                     onClick={form.handleSubmit(onSubmit)}
                     className={`flex ml-auto mr-10 items-center gap-x-3`}
                   >
-                    Submit
+                    {registerPending ? <Loader /> : "Submit"}
                   </Button>
                 )}
               </div>
