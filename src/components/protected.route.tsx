@@ -1,6 +1,6 @@
 import React from "react";
-import useCheckAuth from "../hooks/requests/useCheckAuth";
 import { Navigate } from "react-router-dom";
+import useCheckAuth from "../hooks/requests/useCheckAuth";
 interface Props {
   children: React.ReactNode;
 }
@@ -11,7 +11,6 @@ const ProtectedRouteComponent = ({ children }: Props) => {
   if (isFetching) {
     return;
   }
-
   const status = data?.data;
 
   return <>{isSuccess && status ? children : <Navigate to={"sign-in"} />}</>;

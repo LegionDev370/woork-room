@@ -7,6 +7,7 @@ const ENDPOINTS = {
     checkEmail: () => `user/email-check`,
     profileQuestions: (stepNumber: number) =>
       `admin/user-profile/questions?step_number=${stepNumber}`,
+    me: () => `me`,
   },
   socket: {
     chat: () => `/chat`,

@@ -13,9 +13,11 @@ import { useRegister, type IRegister } from "../hooks/requests/useRegister";
 import useStepProgressAuth from "../hooks/useStepProgressAuth";
 import { useNavigate } from "react-router-dom";
 import Loader from "../components/ui/Loader";
+import { useUserStore } from "../store/user.store";
 const SignUpPage = () => {
   const [currentStep, setCurrentStep] = useState(1);
   const [nextStep, setNextStep] = useState<boolean>(false);
+  const { setLoggedIn } = useUserStore();
   const form = useForm();
   const formRef = useRef<HTMLFormElement>(null);
   const totalStep = 4;
@@ -117,7 +119,10 @@ const SignUpPage = () => {
   }, [isSuccess]);
 
   useEffect(() => {
-    if (registerSuccess) navigate("/");
+    if (registerSuccess) {
+      navigate("/");
+      setLoggedIn(true);
+    }
   }, [registerSuccess]);
 
   const onNextStep = () => {

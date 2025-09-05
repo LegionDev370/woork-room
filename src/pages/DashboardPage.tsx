@@ -1,5 +1,11 @@
+import Chat from "../components/chat";
+
 const DashboardPage = () => {
-  return <div>DashboardPage</div>;
+  return (
+    <div>
+      <Chat />
+    </div>
+  );
 };
 
 export default DashboardPage;

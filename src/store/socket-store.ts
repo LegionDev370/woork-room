@@ -40,11 +40,13 @@ export const useSocketStore = create<ISocket>((set, get) => {
     },
     handleDisconnect: () => {
       const socketData = get();
-      socketData.socket.disconnect();
-      set(() => ({
-        socket: null,
-        isConnected: false,
-      }));
+      if (socketData.socket) {
+        socketData.socket.disconnect();
+        set(() => ({
+          socket: null,
+          isConnected: false,
+        }));
+      }
     },
   };
 });

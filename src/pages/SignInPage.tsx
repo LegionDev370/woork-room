@@ -10,6 +10,7 @@ import Input from "../components/ui/Input";
 import Loader from "../components/ui/Loader";
 import { useLogin } from "../hooks/requests/useLogin";
 import useCheckAuth from "../hooks/requests/useCheckAuth";
+import { useUserStore } from "../store/user.store";
 
 interface ILoginForm {
   email: string;
@@ -19,6 +20,7 @@ interface ILoginForm {
 const SignInPage = () => {
   const { register, handleSubmit } = useForm<ILoginForm>();
   const { mutateAsync, isPending, isSuccess, isError, error } = useLogin();
+  const { setLoggedIn } = useUserStore();
   const { isSuccess: checkAuthSuccess, data, isFetching } = useCheckAuth();
   const navigate = useNavigate();
   const onLogin: SubmitHandler<ILoginForm> = ({ email, password }) => {
@@ -29,6 +31,7 @@ const SignInPage = () => {
     if (isSuccess) {
       toast.success("success");
       setTimeout(() => {
+        setLoggedIn(true);
         navigate("/");
       }, 2000);
     }
@@ -44,7 +47,7 @@ const SignInPage = () => {
     return <></>;
   }
 
-  const statusAuth = data.data;
+  const statusAuth = data?.data;
 
   return (
     <>
