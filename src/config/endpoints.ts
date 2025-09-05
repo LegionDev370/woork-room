@@ -8,5 +8,8 @@ const ENDPOINTS = {
     profileQuestions: (stepNumber: number) =>
       `admin/user-profile/questions?step_number=${stepNumber}`,
   },
+  socket: {
+    chat: () => `/chat`,
+  },
 };
 export default ENDPOINTS;
