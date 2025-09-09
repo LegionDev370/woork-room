@@ -1,9 +1,8 @@
 FROM node:22-alpine
 WORKDIR /app
 COPY package*.json yarn.lock ./
-RUN yarn install --frozen-lockfile && yarn cache clean
-RUN npm i -g serve
+RUN yarn install --production --frozen-lockfile && yarn cache clean
 COPY . . 
 RUN yarn build
 EXPOSE 3000
-CMD [ "serve","-s","dist"]
+CMD [ "yarn","preview","--host","0.0.0.0"]
