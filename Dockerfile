@@ -1,8 +1,14 @@
+FROM node:22-alpine as builder
+WORKDIR /app
+COPY package*.json yarn.lock ./
+RUN npm i yarn -g
+RUN yarn install
+COPY . . 
+RUN yarn build
+
 FROM node:22-alpine
 WORKDIR /app
-COPY package*.json ./
-RUN npm install
-COPY . . 
-RUN npm run build
-EXPOSE 3000
-CMD [ "npm","run","preview","--host","0.0.0.0"]  
+COPY --from=builder /app/dist ./dist
+RUN yarn install --production --frozen-lockfile && yarn cache clean
+COPY . .
+CMD [ "yarn","preview","--host","0.0.0.0"]
