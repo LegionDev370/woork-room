@@ -1,17 +1,10 @@
-FROM node:22-alpine AS builder
-WORKDIR /app
-COPY package*.json yarn.lock ./
-RUN npm install -g npm@11.6.0
-RUN npm install -g yarn --force
-RUN yarn install
-COPY . . 
-RUN yarn build
-
 FROM node:22-alpine
 WORKDIR /app
-COPY --from=builder /app/dist ./dist
+RUN corepack enable
+COPY package*.json yarn.lock ./
 RUN npm install -g npm@11.6.0
-RUN npm install -g yarn --force
 RUN yarn install --frozen-lockfile && yarn cache clean
 COPY . .
+RUN yarn build
+EXPOSE 4173
 CMD [ "yarn","preview","--host","0.0.0.0"]

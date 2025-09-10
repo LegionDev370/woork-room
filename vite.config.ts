@@ -4,10 +4,6 @@ import tailwindcss from "@tailwindcss/vite";
 import { nodePolyfills } from "vite-plugin-node-polyfills";
 export default defineConfig({
   plugins: [react(), tailwindcss(), nodePolyfills()],
-  preview: {
-    port: 3000,
-    strictPort: true,
-  },
   server: {
     proxy: {
       "/socket.io": {
