@@ -1,7 +1,8 @@
 FROM node:22-alpine AS builder
 WORKDIR /app
 COPY package*.json yarn.lock ./
-RUN npm install yarn -g
+RUN npm install -g npm@11.6.0
+RUN npm install -g yarn --force
 RUN yarn install
 COPY . . 
 RUN yarn build
